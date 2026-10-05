@@ -10,6 +10,10 @@ jobs:
     name: Build APK
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_HOME: /usr/local/lib/android/sdk
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,8 +29,17 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Verify Android SDK (pre-installed)
+        run: |
+          echo "ANDROID_HOME = $ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT = $ANDROID_SDK_ROOT"
+          ls -la $ANDROID_HOME || true
+          ls $ANDROID_HOME/platforms || true
+          ls $ANDROID_HOME/build-tools || true
+
+      - name: Accept Android SDK licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Prepare web assets
         run: |
@@ -51,8 +64,8 @@ jobs:
 
       - name: Configure Android app name
         run: |
-          cd android/app/src/main/res/values
-          cat > strings.xml <<'EOF'
+          mkdir -p android/app/src/main/res/values
+          cat > android/app/src/main/res/values/strings.xml <<'EOF'
           <?xml version='1.0' encoding='utf-8'?>
           <resources>
               <string name="app_name">WADAAG</string>
@@ -62,27 +75,16 @@ jobs:
           </resources>
           EOF
 
-      - name: Build debug APK
+      - name: Build Debug APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
-
-      - name: Build release APK (unsigned)
-        working-directory: android
-        run: |
-          ./gradlew assembleRelease --no-daemon || echo "Release build failed (signing required) — using debug only"
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: wadaag-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: warn
-
-      - name: Upload Release APK (if built)
-        uses: actions/upload-artifact@v4
-        with:
-          name: wadaag-release-apk
-          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
-          if-no-files-found: ignore
+          if-no-files-found: error
+          retention-days: 30

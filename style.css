@@ -1,0 +1,98 @@
+/* =========================================================================
+   WADAAG — Custom styles
+   ========================================================================= */
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f7f8fb;
+  color: #0b1220;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #d3d8e3; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #a8b0c4; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Animations */
+.fade-in { animation: fadeIn .35s ease both; }
+.slide-up { animation: slideUp .4s cubic-bezier(.2,.7,.3,1) both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, #eef0f5 0%, #f7f8fb 50%, #eef0f5 100%);
+  background-size: 200% 100%;
+  animation: sk 1.4s infinite;
+}
+
+@keyframes sk {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* Focus ring */
+.ring-focus:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 74, 143, .35);
+  border-color: #254a8f;
+}
+
+/* Details */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+
+/* Layout helpers */
+.aspect-book { aspect-ratio: 2/3; }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile safe area for bottom nav */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Disable text selection glow on mobile tap */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better inputs on Android */
+input, select, textarea {
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="file"] {
+  -webkit-appearance: none;
+}

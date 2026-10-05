@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1e3d" />
+<title>WADAAG — Buugaaga. Fasalkaaga. Waxbarashadaada.</title>
+<meta name="description" content="WADAAG — Buugaag PDF oo loo qoondeeyay fasalkaaga. F8, F9, F10, F11, F12." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f1e3d'/><path d='M7 9c4-1.5 8-1.5 9 1v13c-1-2.5-5-2.5-9-1z' fill='%23f7f7f5'/><path d='M25 9c-4-1.5-8-1.5-9 1v13c1-2.5 5-2.5 9-1z' fill='%23e5b955'/></svg>" />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+<!-- Tailwind config must run AFTER Tailwind loads -->
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Fraunces','serif'] },
+      colors: {
+        ink: { 900:'#0b1220', 800:'#111a2e', 700:'#1a2540', 600:'#2a3552', 500:'#4a5575', 400:'#7a849e', 300:'#a8b0c4', 200:'#d3d8e3', 100:'#eef0f5', 50:'#f7f8fb' },
+        brand: { 900:'#0b1730', 800:'#0f1e3d', 700:'#152a55', 600:'#1c376d', 500:'#254a8f', 400:'#3b62ab', 300:'#6d8bcb', 200:'#a8bde3', 100:'#dde5f3', 50:'#f1f5fb' },
+        gold: { 700:'#a67c1a', 600:'#c8961f', 500:'#e5b955', 400:'#efcf7a', 300:'#f5dfa0', 200:'#f9ecc4', 100:'#fcf5e0' },
+        leaf: { 700:'#1c5a3d', 600:'#267a52', 500:'#34996a', 100:'#e3f5ec' },
+        ember:{ 700:'#8f2b2b', 600:'#b93737', 500:'#d94a4a', 100:'#fbe5e5' },
+      },
+    }
+  }
+}
+</script>
+
+<!-- Custom styles -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
